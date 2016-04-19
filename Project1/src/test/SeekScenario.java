@@ -2,11 +2,13 @@ package test;
 
 import controllers.EmptyController;
 import controllers.KeyboardController;
+import controllers.SeekController;
 import engine.Car;
 import engine.Game;
 import engine.GameObject;
 import engine.GameWindow;
 import engine.Obstacle;
+
 import java.awt.Color;
 
 /**
@@ -29,7 +31,7 @@ public class SeekScenario {
         game.add(new Obstacle(775,0,25,600,Color.GRAY));
         // set up the cars and markers:
         GameObject car1 = new Car("graphics/redcar.png",200,300,-Math.PI/2, new KeyboardController());
-        GameObject car2 = new Car("graphics/bluecar.png",600,300,-Math.PI/2, new EmptyController());
+        GameObject car2 = new Car("graphics/bluecar.png",600,300,-Math.PI/2, new SeekController(car1));
         game.add(car1);
         game.add(car2);
         GameWindow.newWindow(game);

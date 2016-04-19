@@ -1,0 +1,88 @@
+package controllers;
+
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
+import java.util.Vector;
+
+import engine.Car;
+import engine.Game;
+import engine.GameObject;
+
+public class SeekController extends Controller {
+	public static final int key_accelerate = KeyEvent.VK_UP;
+	public static final int key_brake = KeyEvent.VK_DOWN;
+	public static final int key_left = KeyEvent.VK_LEFT;
+	public static final int key_right = KeyEvent.VK_RIGHT;
+	    
+	// store which keys are currently pressed:
+	boolean keyboardState[] = new boolean[KeyEvent.KEY_LAST];
+	
+	private GameObject target;
+	
+	public SeekController(GameObject _target) {
+		target = _target;
+		
+	    for(int i = 0;i<KeyEvent.KEY_LAST;i++) keyboardState[i] = false;
+	    KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(
+	        new KeyEventDispatcher() {
+	            public boolean dispatchKeyEvent(KeyEvent ke) {
+	                synchronized (KeyboardController.class) {
+	                    switch (ke.getID()) {
+	                    case KeyEvent.KEY_PRESSED:
+	                        keyboardState[ke.getKeyCode()] = true;
+	//	                            System.out.println("pressed: " + ke.getKeyCode());
+	                        break;
+	
+	                    case KeyEvent.KEY_RELEASED:
+	                        keyboardState[ke.getKeyCode()] = false;
+	                        break;
+	                    }
+	                    return false;
+	                }
+	            }
+	        });        
+	}
+
+	private Vector<Double> normlize(Vector<Double> v1) {
+		double mag = Math.sqrt(v1.get(0)*v1.get(0) + v1.get(1)*v1.get(1));
+	}
+	
+	public void update(Car subject, Game game, double delta_t, double controlVariables[]) {
+	    controlVariables[VARIABLE_STEERING] = 0;
+	    controlVariables[VARIABLE_THROTTLE] = 0;
+	    controlVariables[VARIABLE_BRAKE] = 0;
+	    
+	    //set the vector size
+	    delta_t = (1.0 / 45.0);
+	    
+	    Vector<Double> car1 = new Vector<Double>(2);
+	    car1.
+	    Vector<Double> targetCar = new Vector<Double>(2);
+	    
+	    car1.set(0, subject.getX());
+	    car1.set(1, subject.getY());
+	    
+	    targetCar.set(0, target.getX());
+	    targetCar.set(1, target.getY());
+	    
+	    double desiredVelocity = Normalize(targetCar - car1) * VehicleMaxSpeed
+
+	    //Have to calculate the velocity
+	    
+	    //Calculate the steering angle 
+	    
+	    //Break?
+
+	    System.out.println("-----");
+	    System.out.println(diffX);
+	    System.out.println(diffY);
+	    System.out.println("-----");
+	    /*
+	    if (keyboardState[key_left] && !keyboardState[key_right]) controlVariables[VARIABLE_STEERING] = -1;
+	    if (keyboardState[key_right] && !keyboardState[key_left]) controlVariables[VARIABLE_STEERING] = +1;
+	    if (keyboardState[key_accelerate]) controlVariables[VARIABLE_THROTTLE] = 1;
+	    if (keyboardState[key_brake]) controlVariables[VARIABLE_BRAKE] = 1;
+	    */
+	}
+}

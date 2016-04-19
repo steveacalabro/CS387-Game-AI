@@ -1,0 +1,11 @@
+package engine;
+
+/**
+ * This comes directly from http://introcs.cs.princeton.edu/java/34nbody/Vector.java.html
+ * with a few changes
+ * @author stephencalabro
+ */
+
+public class Vector {
+
+}
