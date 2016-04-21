@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="controllers.SeekController"/>
+<fullyQualifiedTypeName name="java.util.Vector"/>
+<fullyQualifiedTypeName name="engine.Vector"/>
+<fullyQualifiedTypeName name="controllers.ArriveController"/>
 </qualifiedTypeNameHistroy>

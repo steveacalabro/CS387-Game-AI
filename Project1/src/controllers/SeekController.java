@@ -21,27 +21,7 @@ public class SeekController extends Controller {
 	private GameObject target;
 	
 	public SeekController(GameObject _target) {
-		target = _target;
-		
-	    for(int i = 0;i<KeyEvent.KEY_LAST;i++) keyboardState[i] = false;
-	    KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(
-	        new KeyEventDispatcher() {
-	            public boolean dispatchKeyEvent(KeyEvent ke) {
-	                synchronized (KeyboardController.class) {
-	                    switch (ke.getID()) {
-	                    case KeyEvent.KEY_PRESSED:
-	                        keyboardState[ke.getKeyCode()] = true;
-	//	                            System.out.println("pressed: " + ke.getKeyCode());
-	                        break;
-	
-	                    case KeyEvent.KEY_RELEASED:
-	                        keyboardState[ke.getKeyCode()] = false;
-	                        break;
-	                    }
-	                    return false;
-	                }
-	            }
-	        });        
+		target = _target;    
 	}
 	
 	public Vector seek(Car subject) {

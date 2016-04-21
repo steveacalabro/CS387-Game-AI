@@ -23,9 +23,9 @@ public abstract class Controller {
     
     public abstract void update(Car subject, Game game, double delta_t, double controlVariables[]);
     
-    public void motorControl(Car subject, Vector target, double controlVariables[]) {
+    public void motorControl(Car subject, Vector target, double controlVariables[]) {   	
     	Vector cur = new Vector(Math.cos(subject.getAngle()), Math.sin(subject.getAngle()));
-    	
+
     	Vector right = new Vector((cur.y * -1), cur.x);
     	
     	//Calculates the throttle
@@ -37,9 +37,9 @@ public abstract class Controller {
     	
     	//Calculate steering 
     	if(right.dot(target) > 0) {
-    		controlVariables[VARIABLE_STEERING] = right.dot(target);
+    		controlVariables[VARIABLE_STEERING] = right.dot(target)/2;
     	} else if(right.dot(target) < 0) {
-    		controlVariables[VARIABLE_STEERING] = right.dot(target);
+    		controlVariables[VARIABLE_STEERING] = right.dot(target)/2;
     	}
     }
 }
