@@ -4,4 +4,6 @@
 <fullyQualifiedTypeName name="java.util.Vector"/>
 <fullyQualifiedTypeName name="engine.Vector"/>
 <fullyQualifiedTypeName name="controllers.ArriveController"/>
+<fullyQualifiedTypeName name="controllers.AvoidController"/>
+<fullyQualifiedTypeName name="engine.RotatedRectangle"/>
 </qualifiedTypeNameHistroy>
