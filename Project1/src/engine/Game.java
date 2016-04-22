@@ -24,6 +24,10 @@ public class Game {
         m_frames_per_second = frames_per_second;
     }
     
+    public List<GameObject> getObjects() {
+        return m_objects;
+    }
+    
     public double getWidth() {
         return m_width;
     }

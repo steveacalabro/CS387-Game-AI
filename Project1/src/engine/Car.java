@@ -91,6 +91,10 @@ public class Car extends GameObject {
         gg.dispose();        
     }
     
+    public BufferedImage getImg() {
+    	return m_img;
+    }
+    
     public RotatedRectangle getCollisionBox() {
         return m_collision_box;
     }

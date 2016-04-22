@@ -29,18 +29,6 @@ public class ArriveController extends Controller {
 	}
 	
 	public Vector arrive(Car subject, double delta_t) {
-		/*
-		Arrive(character, E, targetRadius, slowRadius, time)
-		• D = E - character.position
-		• Length = |D|
-		• If Length<targetRadius Return (0,0,0)
-		• If Length>slowRadius then targetSpeed = maxSpeed
-		• else targetSpeed = maxSpeed * Length/slowRadius
-		• targetVelocity = (D/|D|)*targetSpeed
-		• A = (targetVelociy – character.velocity)/time
-		• If |A|>maxAcceleration then A = (A/|A|)*maxAcceleration
-		• Return A 
-		*/
 		Vector targetVelocity = new Vector(subject.getX(), subject.getY());
 		Vector d = new Vector(subject.getX(), subject.getY());
 		Vector a = new Vector(subject.getX(), subject.getY());

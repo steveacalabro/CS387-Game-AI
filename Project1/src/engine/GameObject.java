@@ -37,4 +37,8 @@ public abstract class GameObject {
         if (getCollisionBox()==null || r==null) return false;
         return RotatedRectangle.RotRectsCollision(getCollisionBox(), r);
     }
+    
+    public boolean isObstacle() {
+    	return this instanceof Obstacle;
+    }
 }

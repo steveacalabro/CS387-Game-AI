@@ -1,2 +1,9 @@
 2016-04-19 14:08:21,094 [main] WARN  o.e.r.i.c.rcp.TypeBindingAnalyzer - Can't handle class org.eclipse.jdt.internal.compiler.ast.BinaryExpression as parent of completion location.
 2016-04-19 15:42:55,966 [main] WARN  o.e.r.i.c.rcp.TypeBindingAnalyzer - Can't handle class org.eclipse.jdt.internal.compiler.ast.IfStatement as parent of completion location.
+2016-04-22 15:08:21,751 [main] WARN  o.e.r.i.c.rcp.TypeBindingAnalyzer - Can't handle class org.eclipse.jdt.internal.compiler.ast.AND_AND_Expression as parent of completion location.
+2016-04-22 15:08:59,220 [main] WARN  o.e.r.i.c.rcp.TypeBindingAnalyzer - Can't handle class org.eclipse.jdt.internal.compiler.ast.AND_AND_Expression as parent of completion location.
+2016-04-22 15:09:59,156 [main] WARN  o.e.r.i.c.rcp.TypeBindingAnalyzer - Can't handle class org.eclipse.jdt.internal.compiler.ast.IfStatement as parent of completion location.
+2016-04-22 15:10:15,084 [main] WARN  o.e.r.i.c.rcp.TypeBindingAnalyzer - Can't handle class org.eclipse.jdt.internal.compiler.ast.IfStatement as parent of completion location.
+2016-04-22 15:10:35,229 [main] WARN  o.e.r.i.c.rcp.TypeBindingAnalyzer - Can't handle class org.eclipse.jdt.internal.compiler.ast.IfStatement as parent of completion location.
+2016-04-22 15:11:07,926 [main] WARN  o.e.r.i.c.rcp.TypeBindingAnalyzer - Can't handle class org.eclipse.jdt.internal.compiler.ast.IfStatement as parent of completion location.
+2016-04-22 15:30:56,695 [main] WARN  o.e.r.i.c.rcp.TypeBindingAnalyzer - Can't handle class org.eclipse.jdt.internal.compiler.ast.IfStatement as parent of completion location.
