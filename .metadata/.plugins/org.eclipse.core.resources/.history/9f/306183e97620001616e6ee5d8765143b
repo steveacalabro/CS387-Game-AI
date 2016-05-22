@@ -1,0 +1,21 @@
+package behaviorTree;
+
+import ch.idsia.agents.controllers.BehaviorAgent;
+
+//CanShoot
+public class IsEnemyNear implements task {
+	
+	public boolean run(BehaviorAgent b) {
+		int x = b.getMarioEgoRow();
+	    int y = b.getMarioEgoCol();
+	    
+	    boolean enemyNear = false;
+	    for(int i = 0; i < 3; i++) {
+	    	if((isCreature(b.getEnemiesCellValue(x, y + i)) || isCreature(b.getEnemiesCellValue(x + i, y)) || isCreature(enemies[x + i][y + i]))) {
+	    		enemyNear = true;
+	    		break;
+	    	}
+	    }
+		return enemyNear && isMarioAbleToShoot;
+	}
+}

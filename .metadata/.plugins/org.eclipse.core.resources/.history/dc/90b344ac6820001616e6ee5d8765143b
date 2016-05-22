@@ -1,0 +1,154 @@
+package ch.idsia.agents.controllers;
+
+import ch.idsia.agents.Agent;
+import ch.idsia.benchmark.mario.engine.sprites.Mario;
+import ch.idsia.benchmark.mario.engine.sprites.Sprite;
+import ch.idsia.benchmark.mario.environments.Environment;
+
+public class BehaviorAgent extends BasicMarioAIAgent implements Agent
+{
+	public BehaviorAgent()
+	{
+	    super("BehaviorAgent");
+	}
+	
+	int trueJumpCounter = 0;
+	int trueSpeedCounter = 0;
+	
+	private boolean isCreature(int c)
+	{
+	    switch (c)
+	    {
+	        case Sprite.KIND_GOOMBA:
+	        case Sprite.KIND_RED_KOOPA:
+	        case Sprite.KIND_RED_KOOPA_WINGED:
+	        case Sprite.KIND_GREEN_KOOPA_WINGED:
+	        case Sprite.KIND_GREEN_KOOPA:
+	            return true;
+	    }
+	    return false;
+	}
+	
+	
+	//Sequences
+	private boolean coinSequence() {
+		
+		return false;
+	}
+	
+	private boolean shootSequence() {
+		int x = marioEgoRow;
+	    int y = marioEgoCol;
+	    
+		return (isCreature(enemies[x][y + 2]) || isCreature(enemies[x][y + 1])) && isMarioAbleToShoot;
+	}
+	
+	private boolean forwardSequence() {
+		int x = marioEgoRow;
+	    int y = marioEgoCol;
+	    
+	    /*System.out.println("Front");
+	    System.out.println(levelScene[x][y+2]);
+	    System.out.println(levelScene[x][y+1]);
+	    System.out.println("------");*/
+		if(levelScene[x][y+2] != 0 || levelScene[x][y+1] != 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	private boolean forwardJumpSequence() {
+		return isMarioAbleToJump;
+	}
+	
+	private boolean backwardSequence() {
+		int x = marioEgoRow;
+	    int y = marioEgoCol;
+	    
+	    /*System.out.println("Back");
+	    System.out.println(levelScene[x][y-2]);
+	    System.out.println(levelScene[x][y-1]);
+	    System.out.println("------");*/
+		if(levelScene[x][y-2] != 0 || levelScene[x][y-1] != 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	private boolean backwardJumpSequence() {
+		return isMarioAbleToJump;
+	}
+	
+	private boolean forwardDoubleJumpSequence() {
+		return isMarioAbleToJump || !isMarioOnGround;
+	}
+	
+	//Actions
+	private void coinAction() {
+		
+	}
+	
+	private void shootAction() {
+		System.out.println("Shooting");
+		action[Mario.KEY_SPEED] = true;
+	}
+	
+	private void forwardAction() {
+		System.out.println("Forward");
+		action[Mario.KEY_RIGHT] = true;
+	}
+	
+	private void forwardJumpAction() {
+		System.out.println("Forward Jump");
+		action[Mario.KEY_JUMP] = true;
+		action[Mario.KEY_RIGHT] = true;
+	}
+	
+	private void backwardAction() {
+		System.out.println("Back");
+		action[Mario.KEY_LEFT] = true;
+	}
+	
+	private void backwardJumpAction() {
+		System.out.println("Back Jump");
+		action[Mario.KEY_JUMP] = true;
+		action[Mario.KEY_LEFT] = true;
+	}
+	
+	//Mehtod to choose
+	public boolean[] getAction()
+	{	
+		if(!blackboard.doulbeJump()) {
+			reset();
+		} else {
+			reset();
+			action[Mario.KEY_JUMP] = true;
+			action[Mario.KEY_RIGHT] = true;
+		}
+		
+	    if(coinSequence()) {
+	    	//coinAction();
+	    } else if(shootSequence()) {
+	    	shootAction();
+	    } else if(forwardSequence()) {
+	    	forwardAction();
+	    } else if(forwardJumpSequence()) {
+	    	forwardJumpAction();
+	    } else if(backwardSequence()) {
+	    	backwardAction();
+	    } else if(backwardJumpSequence()){
+	    	backwardJumpAction();
+	    } else {
+	    	forwardAction();
+	    }
+	    
+	    return action;
+	}
+	
+	public void reset()
+	{
+		action = new boolean[Environment.numberOfKeys];
+	}
+}

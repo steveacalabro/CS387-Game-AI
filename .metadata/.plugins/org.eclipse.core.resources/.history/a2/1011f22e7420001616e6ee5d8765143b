@@ -1,0 +1,13 @@
+package behaviorTree;
+
+import ch.idsia.agents.controllers.BasicMarioAIAgent;
+import ch.idsia.benchmark.mario.engine.sprites.Mario;
+
+public class Coin implements Task {
+	public boolean run(BasicMarioAIAgent b) {
+		return true;
+		
+		action[Mario.KEY_JUMP] = true;
+		action[Mario.KEY_RIGHT] = true;
+	}
+}

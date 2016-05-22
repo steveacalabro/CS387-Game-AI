@@ -66,8 +66,8 @@ private boolean isCreature(int c)
 
 public boolean[] getAction()
 {
-    int x = marioEgoRow;
-    int y = marioEgoCol;
+    int x = getMarioEgoRow();
+    int y = getMarioEgoCol();
 
     action[Mario.KEY_SPEED] = isCreature(enemies[x][y + 2]) || isCreature(enemies[x][y + 1]);
 

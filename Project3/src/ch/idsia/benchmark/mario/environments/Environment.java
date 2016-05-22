@@ -28,6 +28,7 @@
 package ch.idsia.benchmark.mario.environments;
 
 import ch.idsia.agents.Agent;
+import ch.idsia.agents.controllers.Blackboard;
 import ch.idsia.benchmark.mario.engine.Replayer;
 import ch.idsia.benchmark.mario.engine.sprites.Mario;
 import ch.idsia.tools.EvaluationInfo;
@@ -174,6 +175,8 @@ public int getTimeSpent();
 public byte[][] getScreenCapture();
 
 void saveLastRun(String filename);
+
+Blackboard getBlackboard();
 }
 
 

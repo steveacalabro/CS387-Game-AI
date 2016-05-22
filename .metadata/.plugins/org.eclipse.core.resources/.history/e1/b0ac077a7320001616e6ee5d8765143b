@@ -1,0 +1,7 @@
+package behaviorTree;
+
+public class Task {
+	public boolean run(BasicMarioAIAgent b) {
+		
+	}
+}

@@ -1,0 +1,6 @@
+package behaviorTree;
+
+//CanShoot
+public class IsEnemyNear {
+
+}

@@ -28,6 +28,7 @@
 package ch.idsia.benchmark.mario.environments;
 
 import ch.idsia.agents.Agent;
+import ch.idsia.agents.controllers.Blackboard;
 import ch.idsia.benchmark.mario.engine.*;
 import ch.idsia.benchmark.mario.engine.level.Level;
 import ch.idsia.benchmark.mario.engine.sprites.Mario;
@@ -84,12 +85,14 @@ public static SystemOfValues IntermediateRewardsSystemOfValues = new SystemOfVal
 
 DecimalFormat df = new DecimalFormat("######.#");
 
+Blackboard blackboard;
+
 public static MarioEnvironment getInstance()
 {
     return ourInstance;
 }
 
-private MarioEnvironment()
+public MarioEnvironment()
 {
 //        System.out.println("System.getProperty(\"java.awt.headless\") = " + System.getProperty("java.awt.headless"));
 //        System.out.println("System.getProperty(\"verbose\") = " + System.getProperty("-verbose"));
@@ -97,6 +100,7 @@ private MarioEnvironment()
 //        System.out.flush();
     System.out.println(GlobalOptions.getBenchmarkName());
     levelScene = new LevelScene();
+    blackboard = new Blackboard();
 }
 
 public void resetDefault()
@@ -741,5 +745,10 @@ public void saveLastRun(String filename)
 //{
 //    this.isRecording = isRecording;
 //}
+
+@Override
+public Blackboard getBlackboard() {
+	return blackboard;
+}
 }
 

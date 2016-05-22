@@ -1,0 +1,14 @@
+package ch.idsia.agents.controllers;
+
+import java.util.ArrayList;
+
+public class Blackboard {
+	public boolean doubleJump;
+
+	public boolean coinUpLeft;
+	public boolean coinUpRight;
+	
+	public Blackboard() {
+		doubleJump = false;
+	}
+}

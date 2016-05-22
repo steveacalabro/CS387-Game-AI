@@ -1,0 +1,6 @@
+1463952937465	Rename type 'Blackboarf'
+1463959443747	Rename type 'Coin'
+1463959727358	Rename compilation unit 'backwardJumpAction.java'
+1463959944562	Encapsulate field 'marioEgoRow'
+1463959966091	Encapsulate field 'marioEgoCol'
+1463960655443	Encapsulate field 'isMarioAbleToShoot'

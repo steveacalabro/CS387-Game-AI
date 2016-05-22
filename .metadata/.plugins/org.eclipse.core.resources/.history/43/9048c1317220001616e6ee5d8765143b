@@ -1,0 +1,204 @@
+package ch.idsia.agents.controllers;
+
+import ch.idsia.agents.Agent;
+import ch.idsia.benchmark.mario.engine.sprites.Mario;
+import ch.idsia.benchmark.mario.engine.sprites.Sprite;
+import ch.idsia.benchmark.mario.environments.Environment;
+
+public class BehaviorAgent extends BasicMarioAIAgent implements Agent
+{
+	private boolean coinRight = false;
+	private boolean coinUp = false;
+	
+	public BehaviorAgent()
+	{
+	    super("BehaviorAgent");
+	}
+	
+	int trueJumpCounter = 0;
+	int trueSpeedCounter = 0;
+	
+	private boolean isCreature(int c)
+	{
+	    switch (c)
+	    {
+	        case Sprite.KIND_GOOMBA:
+	        case Sprite.KIND_RED_KOOPA:
+	        case Sprite.KIND_RED_KOOPA_WINGED:
+	        case Sprite.KIND_GREEN_KOOPA_WINGED:
+	        case Sprite.KIND_GREEN_KOOPA:
+	            return true;
+	    }
+	    return false;
+	}
+	
+	private boolean isCoin(int c)
+	{
+	    switch (c)
+	    {
+	        case -24:
+	            return true;
+	    }
+	    return false;
+	}
+	
+	private boolean clearFront() {
+		int x = marioEgoRow;
+	    int y = marioEgoCol;
+	    
+	    boolean enemyInFront = false;
+	    if(isCreature(enemies[x+1][y]) || isCreature(enemies[x + 1][y+1])) {
+	    	enemyInFront = true;
+		}
+	    
+	    boolean objectInFront = false;
+		if(levelScene[x+1][y] != 0 || levelScene[x+1][y+1] != 0) {
+			objectInFront = true;
+		}
+
+		return !enemyInFront && !objectInFront;
+	}
+	
+	private boolean clearBack() {
+		int x = marioEgoRow;
+	    int y = marioEgoCol;
+	    
+	    boolean enemyBehind = false;
+	    if(isCreature(enemies[x - 1][y])) {
+	    	enemyBehind = true;
+		}
+	    
+	    boolean objectBehind = false;
+		if(levelScene[x-1][y] != 0) {
+			objectBehind = true;
+		} else {
+			objectBehind = false;
+		}
+		
+		return !enemyBehind && !objectBehind;
+	}
+	
+	//Sequences
+	private boolean coinSequence() {
+		int x = marioEgoRow;
+	    int y = marioEgoCol;
+	    
+	    if(isCoin(mergedObservation[x+2][y+2])) {
+	    	coinUp = true;
+	    	return clearFront();
+	    } else if(isCoin(mergedObservation[x+2][y])) {
+	    	coinRight = true;
+	    	return clearFront();
+	    } else {
+	    	return false;
+	    }
+	}
+	
+	private boolean shootSequence() {
+		int x = marioEgoRow;
+	    int y = marioEgoCol;
+	    
+	    boolean enemyNear = false;
+	    for(int i = 0; i < 5; i++) {
+	    	
+	    }
+		return (isCreature(enemies[x][y + 3]) || isCreature(enemies[x + 3][y])) && isMarioAbleToShoot;
+	}
+	
+	private boolean forwardSequence() {
+		return clearFront();
+	}
+	
+	private boolean forwardJumpSequence() {
+		boolean isEnemyInJump = false;
+		int x = marioEgoRow;
+	    int y = marioEgoCol;
+		
+		if(isCreature(enemies[x][y + 3]) || isCreature(enemies[x + 3][y])) {
+			isEnemyInJump = true;
+		}
+		
+		return (isMarioAbleToJump || !isMarioOnGround) && !isEnemyInJump;
+	}
+	
+	private boolean backwardSequence() {
+		return clearBack();
+	}
+	
+	private boolean backwardJumpSequence() {
+		boolean isEnemyInJump = false;
+		int x = marioEgoRow;
+	    int y = marioEgoCol;
+		
+		if(isCreature(enemies[x-2][y]) || isCreature(enemies[x-2][y+2])) {
+			isEnemyInJump = true;
+		}
+		
+		return (isMarioAbleToJump || !isMarioOnGround) && !isEnemyInJump;
+	}
+	
+	//Actions
+	private void coinAction() {
+		System.out.println("Coin");
+		if(coinUp) {
+			action[Mario.KEY_JUMP] = true;
+			action[Mario.KEY_RIGHT] = true;
+		} else if(coinRight) {
+			action[Mario.KEY_RIGHT] = true;
+		} 
+	}
+	
+	private void shootAction() {
+		System.out.println("Shooting");
+		action[Mario.KEY_SPEED] = true;
+	}
+	
+	private void forwardAction() {
+		System.out.println("Forward");
+		action[Mario.KEY_RIGHT] = true;
+	}
+	
+	private void forwardJumpAction() {
+		System.out.println("Forward Jump");
+		action[Mario.KEY_JUMP] = true;
+		action[Mario.KEY_RIGHT] = true;
+	}
+	
+	private void backwardAction() {
+		System.out.println("Back");
+		action[Mario.KEY_LEFT] = true;
+	}
+	
+	private void backwardJumpAction() {
+		System.out.println("Back Jump");
+		action[Mario.KEY_JUMP] = true;
+		action[Mario.KEY_LEFT] = true;
+	}
+	
+	//Mehtod to choose
+	public boolean[] getAction()
+	{	
+		reset();
+		
+		if(coinSequence()) {
+	    	coinAction();
+	    } else if(shootSequence()) {
+	    	shootAction();
+	    } else if(forwardSequence()) {
+	    	forwardAction();
+	    } else if(forwardJumpSequence()) {
+	    	forwardJumpAction();
+	    } else if(backwardSequence()) {
+	    	backwardAction();
+	    } else if(backwardJumpSequence()){
+	    	backwardJumpAction();
+	    }
+	    
+	    return action;
+	}
+	
+	public void reset()
+	{
+		action = new boolean[Environment.numberOfKeys];
+	}
+}

@@ -1,0 +1,12 @@
+package behaviorTree;
+
+import ch.idsia.agents.controllers.BasicMarioAIAgent;
+import ch.idsia.benchmark.mario.engine.sprites.Mario;
+
+public class ShootAction implements Task {
+	public boolean run(BasicMarioAIAgent b) {
+		b.getAction()[Mario.KEY_SPEED] = true;
+		
+		return true;
+	}
+}

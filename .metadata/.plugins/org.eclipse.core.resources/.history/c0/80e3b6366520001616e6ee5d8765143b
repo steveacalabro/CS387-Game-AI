@@ -1,0 +1,5 @@
+package ch.idsia.agents.controllers;
+
+public class Blackboard {
+	public boolean doubleJump;
+}

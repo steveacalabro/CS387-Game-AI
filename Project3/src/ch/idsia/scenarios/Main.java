@@ -39,7 +39,8 @@ public final class Main
 public static void main(String[] args)
 {
 //        final String argsString = "-vis on";
-    final MarioAIOptions marioAIOptions = new MarioAIOptions(args);
+		final String arg2 = "-ag ch.idsia.agents.controllers.BehaviorAgent";
+        final MarioAIOptions marioAIOptions = new MarioAIOptions(arg2);
 //        final Environment environment = new MarioEnvironment();
 //        final Agent agent = new ForwardAgent();
 //        final Agent agent = marioAIOptions.getAgent();

@@ -1,0 +1,20 @@
+package ch.idsia.agents.controllers;
+
+import java.util.ArrayList;
+
+public class Blackboard {
+	public boolean doubleJump;
+	public ArrayList<String> moves = new ArrayList<String>();
+	
+	public Blackboard() {
+		doubleJump = false;
+	}
+	
+	public void addMove(String move) {
+		moves.add(move);
+	}
+	
+	public boolean needDoubleJump() {
+		
+	}
+}

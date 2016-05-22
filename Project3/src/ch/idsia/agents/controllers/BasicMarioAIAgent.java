@@ -57,7 +57,7 @@ protected int marioStatus;
 protected int marioMode;
 protected boolean isMarioOnGround;
 protected boolean isMarioAbleToJump;
-protected boolean isMarioAbleToShoot;
+private boolean isMarioAbleToShoot;
 protected boolean isMarioCarrying;
 protected int getKillsTotal;
 protected int getKillsByFire;
@@ -66,14 +66,16 @@ protected int getKillsByShell;
 
 protected int receptiveFieldWidth;
 protected int receptiveFieldHeight;
-protected int marioEgoRow;
-protected int marioEgoCol;
+private int marioEgoRow;
+private int marioEgoCol;
 
 // values of these variables could be changed during the Agent-Environment interaction.
 // Use them to get more detailed or less detailed description of the level.
 // for information see documentation for the benchmark <link: marioai.org/marioaibenchmark/zLevels
 int zLevelScene = 1;
 int zLevelEnemies = 0;
+
+Blackboard blackboard;
 
 public BasicMarioAIAgent(String s)
 {
@@ -105,12 +107,14 @@ public void integrateObservation(Environment environment)
     marioMode = marioState[1];
     isMarioOnGround = marioState[2] == 1;
     isMarioAbleToJump = marioState[3] == 1;
-    isMarioAbleToShoot = marioState[4] == 1;
+    setMarioAbleToShoot(marioState[4] == 1);
     isMarioCarrying = marioState[5] == 1;
     getKillsTotal = marioState[6];
     getKillsByFire = marioState[7];
     getKillsByStomp = marioState[8];
     getKillsByShell = marioState[9];
+    
+    blackboard = environment.getBlackboard();
 }
 
 public void giveIntermediateReward(float intermediateReward)
@@ -128,8 +132,8 @@ public void setObservationDetails(final int rfWidth, final int rfHeight, final i
     receptiveFieldWidth = rfWidth;
     receptiveFieldHeight = rfHeight;
 
-    marioEgoRow = egoRow;
-    marioEgoCol = egoCol;
+    setMarioEgoRow(egoRow);
+    setMarioEgoCol(egoCol);
 }
 
 @Deprecated
@@ -191,4 +195,28 @@ public int getReceptiveFieldCellValue(int x, int y)
 //        getKillsByStomp = marioState[8];
 //        getKillsByShell = marioState[9];
 //    }
+
+public int getMarioEgoRow() {
+	return marioEgoRow;
+}
+
+public void setMarioEgoRow(int marioEgoRow) {
+	this.marioEgoRow = marioEgoRow;
+}
+
+public int getMarioEgoCol() {
+	return marioEgoCol;
+}
+
+public void setMarioEgoCol(int marioEgoCol) {
+	this.marioEgoCol = marioEgoCol;
+}
+
+public boolean isMarioAbleToShoot() {
+	return isMarioAbleToShoot;
+}
+
+public void setMarioAbleToShoot(boolean isMarioAbleToShoot) {
+	this.isMarioAbleToShoot = isMarioAbleToShoot;
+}
 }

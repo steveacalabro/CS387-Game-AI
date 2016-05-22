@@ -1,0 +1,7 @@
+package behaviorTree;
+
+import ch.idsia.agents.controllers.BasicMarioAIAgent;
+
+public interface Task {
+	public boolean run(BasicMarioAIAgent b);
+}

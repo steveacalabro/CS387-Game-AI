@@ -1,0 +1,117 @@
+package ch.idsia.agents.controllers;
+
+import ch.idsia.agents.Agent;
+import ch.idsia.benchmark.mario.engine.sprites.Mario;
+import ch.idsia.benchmark.mario.engine.sprites.Sprite;
+import ch.idsia.benchmark.mario.environments.Environment;
+
+public class BehaviorAgent extends BasicMarioAIAgent implements Agent
+{
+	public BehaviorAgent()
+	{
+	    super("BehaviorAgent");
+	}
+	
+	int trueJumpCounter = 0;
+	int trueSpeedCounter = 0;
+	
+	private boolean isCreature(int c)
+	{
+	    switch (c)
+	    {
+	        case Sprite.KIND_GOOMBA:
+	        case Sprite.KIND_RED_KOOPA:
+	        case Sprite.KIND_RED_KOOPA_WINGED:
+	        case Sprite.KIND_GREEN_KOOPA_WINGED:
+	        case Sprite.KIND_GREEN_KOOPA:
+	            return true;
+	    }
+	    return false;
+	}
+	
+	
+	//Sequences
+	private boolean coinSequence() {
+		return true;
+	}
+	
+	private boolean shootSequence() {
+		return true;
+	}
+	
+	private boolean forwardSequence() {
+		return true;
+	}
+	
+	private boolean forwardJumpSequence() {
+		return true;
+	}
+	
+	private boolean backwardSequence() {
+		return true;
+	}
+	
+	private boolean backwardJumpSequence() {
+		return true;
+	}
+	
+	//Actions
+	private void coinAction() {
+		
+	}
+	
+	private void shootAction() {
+			
+	}
+	
+	private void forwardAction() {
+		
+	}
+	
+	private void forwardJumpAction() {
+		
+	}
+	
+	private void backwardAction() {
+		
+	}
+	
+	private void backwardJumpAction() {
+		
+	}
+	
+	//Mehtod to choose
+	public boolean[] getAction()
+	{
+	    int x = marioEgoRow;
+	    int y = marioEgoCol;
+	
+	    System.out.println(isCreature(enemies[x][y + 2]));
+	    System.out.println(isCreature(enemies[x][y + 1]));
+	    //action[Mario.KEY_SPEED] = isCreature(enemies[x][y + 2]) || isCreature(enemies[x][y + 1]);
+	
+	    if(coinSequence()) {
+	    	coinAction();
+	    } else if(shootSequence()) {
+	    	shootAction();
+	    } else if(forwardSequence()) {
+	    	forwardAction();
+	    } else if(forwardJumpSequence()) {
+	    	forwardJumpAction();
+	    } else if(backwardSequence()) {
+	    	backwardAction();
+	    } else if(backwardJumpSequence()){
+	    	backwardJumpAction();
+	    } else {
+	    	forwardAction();
+	    }
+	    
+	    return action;
+	}
+	
+	public void reset()
+	{
+	    action[Mario.KEY_RIGHT] = true;
+	//    action[Mario.KEY_SPEED] = true;
+	}
+}
