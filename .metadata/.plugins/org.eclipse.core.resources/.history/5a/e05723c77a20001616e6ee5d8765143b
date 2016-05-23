@@ -1,0 +1,27 @@
+package behaviorTree;
+
+import ch.idsia.agents.controllers.BehaviorAgent;
+
+//CanShoot
+public class IsCoinNear implements Task {
+	BehaviorAgent b;
+	public IsCoinNear(BehaviorAgent _b) {
+		b = _b;
+	}
+	@Override
+	public boolean run() {
+		/*int x = getMarioEgoRow();
+	    int y = getMarioEgoCol();
+	    
+	    if(isCoin(mergedObservation[x+2][y+2])) {
+	    	coinUp = true;
+	    	return clearFront();
+	    } else if(isCoin(mergedObservation[x+2][y])) {
+	    	coinRight = true;
+	    	return clearFront();
+	    } else {
+	    	return false;
+	    }*/
+		return false;
+	}
+}

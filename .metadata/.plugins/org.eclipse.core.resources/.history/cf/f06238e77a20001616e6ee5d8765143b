@@ -1,0 +1,20 @@
+package behaviorTree;
+
+public class Tree {
+	private Task first;
+	
+	public Tree(Task _first, BehaviorAgent b) {
+		first = _first;
+		first.run
+	}
+
+	public Task getFirst() {
+		return first;
+	}
+
+	public void setFirst(Task first) {
+		this.first = first;
+	}
+	
+	
+}

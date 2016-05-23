@@ -1,0 +1,35 @@
+package behaviorTree;
+
+import java.util.ArrayList;
+
+import ch.idsia.agents.controllers.BasicMarioAIAgent;
+import ch.idsia.agents.controllers.BehaviorAgent;
+
+public class Sequence implements Composite{
+	private ArrayList<Task> children; 
+	
+	public Sequence() {
+		children = new ArrayList<Task>();
+	}
+	
+	@Override
+	public boolean run(BehaviorAgent b) {		
+		for(int i = 0; i < children.size(); i ++) {
+			if(children.get(i).run(b) != true) {
+				return false;
+			}
+		}
+		
+		//Run left side. If succeeds then run right side
+		return true;
+	}
+	
+	public ArrayList<Task> getChildren() {
+		return children;
+	}
+	
+	public void addChildren(Task t) {
+		children.add(t);
+	}
+
+}

@@ -1,0 +1,27 @@
+package behaviorTree;
+
+import java.util.ArrayList;
+
+import ch.idsia.agents.controllers.BehaviorAgent;
+
+public class Tree {
+	private ArrayList<Task> children; 
+	
+	public Tree(Task _first, BehaviorAgent b) {
+		children.add(_first);
+	}
+	
+	public void runTree() {
+		
+	}
+
+	public Task getFirst() {
+		return first;
+	}
+
+	public void setFirst(Task first) {
+		this.first = first;
+	}
+	
+	
+}

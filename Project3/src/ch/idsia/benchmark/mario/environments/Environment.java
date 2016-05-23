@@ -27,6 +27,7 @@
 
 package ch.idsia.benchmark.mario.environments;
 
+import behaviorTree.Tree;
 import ch.idsia.agents.Agent;
 import ch.idsia.agents.controllers.Blackboard;
 import ch.idsia.benchmark.mario.engine.Replayer;
@@ -177,6 +178,9 @@ public byte[][] getScreenCapture();
 void saveLastRun(String filename);
 
 Blackboard getBlackboard();
+
+Tree getTree();
+public void setTree(Tree _tree);
 }
 
 

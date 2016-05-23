@@ -4,3 +4,5 @@
 1463959944562	Encapsulate field 'marioEgoRow'
 1463959966091	Encapsulate field 'marioEgoCol'
 1463960655443	Encapsulate field 'isMarioAbleToShoot'
+1463961562780	Encapsulate field 'children'
+1463961771824	Encapsulate field 'first'

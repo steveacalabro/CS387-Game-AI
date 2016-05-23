@@ -27,7 +27,12 @@
 
 package ch.idsia.benchmark.mario.environments;
 
+import behaviorTree.IsEnemyNear;
+import behaviorTree.Sequence;
+import behaviorTree.ShootAction;
+import behaviorTree.Tree;
 import ch.idsia.agents.Agent;
+import ch.idsia.agents.controllers.BehaviorAgent;
 import ch.idsia.agents.controllers.Blackboard;
 import ch.idsia.benchmark.mario.engine.*;
 import ch.idsia.benchmark.mario.engine.level.Level;
@@ -86,6 +91,7 @@ public static SystemOfValues IntermediateRewardsSystemOfValues = new SystemOfVal
 DecimalFormat df = new DecimalFormat("######.#");
 
 Blackboard blackboard;
+Tree tree;
 
 public static MarioEnvironment getInstance()
 {
@@ -129,7 +135,7 @@ public void reset(MarioAIOptions setUpOptions)
 //    if (!setUpOptions.getReplayOptions().equals(""))
 
     this.setAgent(setUpOptions.getAgent());
-
+    
     receptiveFieldWidth = setUpOptions.getReceptiveFieldWidth();
     receptiveFieldHeight = setUpOptions.getReceptiveFieldHeight();
 
@@ -749,6 +755,16 @@ public void saveLastRun(String filename)
 @Override
 public Blackboard getBlackboard() {
 	return blackboard;
+}
+
+@Override
+public Tree getTree() {
+	return tree;
+}
+
+@Override
+public void setTree(Tree _tree) {
+	
 }
 }
 

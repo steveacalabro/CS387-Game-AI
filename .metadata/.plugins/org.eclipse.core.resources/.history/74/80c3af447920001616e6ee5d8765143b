@@ -1,0 +1,15 @@
+package behaviorTree;
+
+import java.util.ArrayList;
+
+import ch.idsia.agents.controllers.BasicMarioAIAgent;
+
+public class Sequence implements Composite{
+	private ArrayList<Task> children 
+	@Override
+	public boolean run(BasicMarioAIAgent b) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

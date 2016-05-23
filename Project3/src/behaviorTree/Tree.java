@@ -1,0 +1,31 @@
+package behaviorTree;
+
+import java.util.ArrayList;
+
+import ch.idsia.agents.controllers.BasicMarioAIAgent;
+import ch.idsia.agents.controllers.BehaviorAgent;
+
+public class Tree {
+	private ArrayList<Task> children; 
+	BehaviorAgent b;
+	
+	public Tree(BehaviorAgent _b) {
+		children = new ArrayList<Task>();
+		b = _b;
+	}
+	
+	public void runTree() {
+		for(int i = 0; i < children.size(); i ++) {
+			if(children.get(i).run(b) == true) {
+				break;
+			}
+		}
+		
+		//Run child 1. If it succeeds then stop
+		//If fail keep going
+	}
+
+	public void addTask(Task _t) {
+		children.add(_t);
+	}
+}

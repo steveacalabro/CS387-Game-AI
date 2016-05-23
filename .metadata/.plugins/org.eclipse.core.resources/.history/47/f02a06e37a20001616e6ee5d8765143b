@@ -1,0 +1,19 @@
+package behaviorTree;
+
+public class Tree {
+	private Task first;
+	
+	public Tree(Task _first) {
+		first = _first;
+	}
+
+	public Task getFirst() {
+		return first;
+	}
+
+	public void setFirst(Task first) {
+		this.first = first;
+	}
+	
+	
+}

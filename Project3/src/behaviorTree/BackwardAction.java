@@ -1,11 +1,13 @@
 package behaviorTree;
 
 import ch.idsia.agents.controllers.BasicMarioAIAgent;
+import ch.idsia.agents.controllers.BehaviorAgent;
 import ch.idsia.benchmark.mario.engine.sprites.Mario;
 
 public class BackwardAction implements Task {
-	public boolean run(BasicMarioAIAgent b) {
-		b.getAction()[Mario.KEY_LEFT] = true;
+	public boolean run(BehaviorAgent b) {
+		b.leftKey();
+		System.out.println("Back");
 		
 		return true;
 	}

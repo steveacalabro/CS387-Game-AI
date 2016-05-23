@@ -1,0 +1,182 @@
+package ch.idsia.agents.controllers;
+
+import behaviorTree.*;
+import ch.idsia.agents.Agent;
+import ch.idsia.benchmark.mario.engine.sprites.Mario;
+import ch.idsia.benchmark.mario.engine.sprites.Sprite;
+import ch.idsia.benchmark.mario.environments.Environment;
+
+public class BehaviorAgent extends BasicMarioAIAgent implements Agent
+{
+	private boolean coinRight = false;
+	private boolean coinUp = false;
+	
+	public BehaviorAgent()
+	{
+	    super("BehaviorAgent");
+	}
+
+	int trueJumpCounter = 0;
+	int trueSpeedCounter = 0;
+	
+	//Sequences
+	/*
+	private boolean coinSequence() {
+		int x = getMarioEgoRow();
+	    int y = getMarioEgoCol();
+	    
+	    if(isCoin(mergedObservation[x+2][y+2])) {
+	    	coinUp = true;
+	    	return clearFront();
+	    } else if(isCoin(mergedObservation[x+2][y])) {
+	    	coinRight = true;
+	    	return clearFront();
+	    } else {
+	    	return false;
+	    }
+	}*/
+	/*
+	private boolean shootSequence() {
+		int x = getMarioEgoRow();
+	    int y = getMarioEgoCol();
+	    
+	    boolean enemyNear = false;
+	    for(int i = 0; i < 3; i++) {
+	    	if((isCreature(enemies[x][y + i]) || isCreature(enemies[x + i][y]) || isCreature(enemies[x + i][y + i]))) {
+	    		enemyNear = true;
+	    		break;
+	    	}
+	    }
+		return enemyNear && isMarioAbleToShoot;
+	}*/
+	/*
+	private boolean forwardSequence() {
+		return clearFront();
+	}*/
+	
+	/*
+	private boolean forwardJumpSequence() {
+		boolean isEnemyInJump = false;
+		int x = getMarioEgoRow();
+	    int y = getMarioEgoCol();
+		
+		if(isCreature(enemies[x][y + 3]) || isCreature(enemies[x + 3][y])) {
+			isEnemyInJump = true;
+		}
+		
+		return (isMarioAbleToJump || !isMarioOnGround) && !isEnemyInJump;
+	}
+	*/
+	/*
+	private boolean backwardSequence() {
+		return clearBack();
+	}
+	
+	private boolean backwardJumpSequence() {
+		boolean isEnemyInJump = false;
+		int x = getMarioEgoRow();
+	    int y = getMarioEgoCol();
+		
+		if(isCreature(enemies[x-2][y]) || isCreature(enemies[x-2][y+2])) {
+			isEnemyInJump = true;
+		}
+		
+		return (isMarioAbleToJump || !isMarioOnGround) && !isEnemyInJump;
+	}
+	*/
+	//Actions
+	/*
+	private void coinAction() {
+		System.out.println("Coin");
+		if(coinUp) {
+			action[Mario.KEY_JUMP] = true;
+			action[Mario.KEY_RIGHT] = true;
+		} else if(coinRight) {
+			action[Mario.KEY_RIGHT] = true;
+		} 
+	}
+	
+	private void shootAction() {
+		System.out.println("Shooting");
+		action[Mario.KEY_SPEED] = true;
+	}
+	
+	private void forwardAction() {
+		System.out.println("Forward");
+		action[Mario.KEY_RIGHT] = true;
+	}
+	
+	private void forwardJumpAction() {
+		System.out.println("Forward Jump");
+		action[Mario.KEY_JUMP] = true;
+		action[Mario.KEY_RIGHT] = true;
+	}
+	
+	private void backwardAction() {
+		System.out.println("Back");
+		action[Mario.KEY_LEFT] = true;
+	}
+	
+	private void backwardJumpAction() {
+		System.out.println("Back Jump");
+		action[Mario.KEY_JUMP] = true;
+		action[Mario.KEY_LEFT] = true;
+	}*/
+	
+	//Mehtod to choose
+	public boolean[] getAction()
+	{	
+		reset();
+		
+		Sequence s1 = new Sequence();
+		IsCoinNear coinNear = new IsCoinNear();
+		CoinAction coinAction = new CoinAction();
+		s1.addChildren(coinNear);
+		s1.addChildren(coinAction);
+		
+		Sequence s2 = new Sequence();
+		IsEnemyNear enemyNear = new IsEnemyNear();
+		ShootAction shootAction = new ShootAction();
+		s2.addChildren(enemyNear);
+		s2.addChildren(shootAction);
+		
+		Sequence s3 = new Sequence();
+		CanGoForward canGoForward = new CanGoForward();
+		ForwardAction forwardAction = new ForwardAction();
+		s3.addChildren(canGoForward);
+		s3.addChildren(forwardAction);
+		
+		Sequence s4 = new Sequence();
+		CanGoForwardJump canGoFowardJump = new CanGoForwardJump();
+		ForwardJumpAction forwarJumpAction = new ForwardJumpAction();
+		s4.addChildren(canGoFowardJump);
+		s4.addChildren(forwarJumpAction);
+		
+		Sequence s5 = new Sequence();
+		CanGoBackward canGoBackward = new CanGoBackward();
+		BackwardAction backwardAction = new BackwardAction();
+		s5.addChildren(canGoBackward);
+		s5.addChildren(backwardAction);
+		
+		Sequence s6 = new Sequence();
+		CanGoBackwardJump canGoBackwardJump = new CanGoBackwardJump();
+		BackwardJumpAction backwardJumpAction = new BackwardJumpAction();
+		s6.addChildren(canGoBackwardJump);
+		s6.addChildren(backwardJumpAction);
+		
+		Tree t = new Tree(s1, this);
+		t.addTask(s2);
+		t.addTask(s3);
+		t.addTask(s4);
+		t.addTask(s5);
+		t.addTask(s6);
+		t.runTree();
+
+	    return action;
+	}
+	
+	public void reset()
+	{
+		action = new boolean[Environment.numberOfKeys];
+	}
+}

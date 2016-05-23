@@ -1,0 +1,25 @@
+package behaviorTree;
+
+import ch.idsia.agents.controllers.BehaviorAgent;
+
+public class Tree {
+	private Task first;
+	
+	public Tree(Task _first) {
+		first = _first;
+	}
+	
+	public runTree() {
+		first.run(b);
+	}
+
+	public Task getFirst() {
+		return first;
+	}
+
+	public void setFirst(Task first) {
+		this.first = first;
+	}
+	
+	
+}

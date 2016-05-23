@@ -1,0 +1,8 @@
+package behaviorTree;
+
+import ch.idsia.agents.controllers.BasicMarioAIAgent;
+
+public class Composite extends Task {
+	public Composite(ArrayList<Task> _childern);
+	protected ArrayList<Task> children;
+}; 

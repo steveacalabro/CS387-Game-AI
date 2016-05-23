@@ -1,0 +1,75 @@
+package behaviorTree;
+
+import ch.idsia.agents.controllers.BasicMarioAIAgent;
+import ch.idsia.agents.controllers.BehaviorAgent;
+import ch.idsia.benchmark.mario.engine.sprites.Sprite;
+
+public interface Task {
+	public boolean run();
+	
+	public static boolean isCreature(int c)
+	{
+	    switch (c)
+	    {
+	        case Sprite.KIND_GOOMBA:
+	        case Sprite.KIND_RED_KOOPA:
+	        case Sprite.KIND_RED_KOOPA_WINGED:
+	        case Sprite.KIND_GREEN_KOOPA_WINGED:
+	        case Sprite.KIND_GREEN_KOOPA:
+	            return true;
+	    }
+	    return false;
+	}
+	
+	public static boolean isCoin(int c)
+	{
+	    switch (c)
+	    {
+	        case -24:
+	            return true;
+	    }
+	    return false;
+	}
+	
+	public static boolean clearFront(BasicMarioAIAgent b) {
+		int x = b.getMarioEgoRow();
+	    int y = b.getMarioEgoCol();
+	    
+	    boolean enemyInFront = false;
+	    for(int i = 0; i < 3; i++) {
+	    	if((isCreature(b.getEnemiesCellValue(x, y + i)) || isCreature(b.getEnemiesCellValue(x + i, y)) || isCreature(b.getEnemiesCellValue(x + i, y + i)))) {
+	    		enemyInFront = true;
+	    		break;
+	    	}
+	    }
+	    
+	    boolean objectInFront = false;
+	    for(int i = 0; i < 3; i++) {
+	    	if(b.getReceptiveFieldCellValue(x, y + i) != 0 || b.getReceptiveFieldCellValue(x + i, y)!= 0 || b.getReceptiveFieldCellValue(x + i, y + i) != 0) {
+	    		objectInFront = true;
+	    		break;
+	    	}
+	    }
+
+		return !enemyInFront && !objectInFront;
+	}
+	
+	public static boolean clearBack(BasicMarioAIAgent b) {
+		int x = b.getMarioEgoRow();
+	    int y = b.getMarioEgoCol();
+	    
+	    boolean enemyBehind = false;
+	    if(isCreature(b.getEnemiesCellValue(x - 1, y))) {
+	    	enemyBehind = true;
+		}
+	    
+	    boolean objectBehind = false;
+		if(b.getReceptiveFieldCellValue(x-1, y) != 0) {
+			objectBehind = true;
+		} else {
+			objectBehind = false;
+		}
+		
+		return !enemyBehind && !objectBehind;
+	}
+}

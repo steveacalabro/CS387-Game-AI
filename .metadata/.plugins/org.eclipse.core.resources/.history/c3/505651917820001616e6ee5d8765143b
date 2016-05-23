@@ -1,0 +1,11 @@
+package behaviorTree;
+
+import java.util.ArrayList;
+
+import ch.idsia.agents.controllers.BasicMarioAIAgent;
+
+public interface Composite extends Task {
+	public Composite(ArrayList<Task> _childern) {
+		
+	}
+}; 

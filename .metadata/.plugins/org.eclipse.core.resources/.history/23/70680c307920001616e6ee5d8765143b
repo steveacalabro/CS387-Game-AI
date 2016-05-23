@@ -1,0 +1,13 @@
+package behaviorTree;
+
+import ch.idsia.agents.controllers.BasicMarioAIAgent;
+
+public class Sequence implements Composite{
+
+	@Override
+	public boolean run(BasicMarioAIAgent b) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

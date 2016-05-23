@@ -1,12 +1,13 @@
 package behaviorTree;
 
 import ch.idsia.agents.controllers.BasicMarioAIAgent;
+import ch.idsia.agents.controllers.BehaviorAgent;
 
 //CanShoot
 public class CanGoForward implements Task {
 	
 	@Override
-	public boolean run(BasicMarioAIAgent b) {
-		return Task.clearFront(b);
+	public boolean run(BehaviorAgent b) {
+		return b.clearFront();
 	}
 }

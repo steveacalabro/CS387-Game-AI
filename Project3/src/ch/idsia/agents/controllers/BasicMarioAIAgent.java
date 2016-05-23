@@ -27,6 +27,7 @@
 
 package ch.idsia.agents.controllers;
 
+import behaviorTree.Tree;
 import ch.idsia.agents.Agent;
 import ch.idsia.benchmark.mario.environments.Environment;
 
