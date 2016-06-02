@@ -3,20 +3,22 @@ package mapGeneration;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class GenerateMap {
 	/**
 	 * This would be in case I wanted to get random walls
 	 */
 	private static ArrayList<Integer> walls = new ArrayList<Integer>() {{
-	    add(67);
+	    add(45);
+	    add(46);
 	}};
 	
 	/**
 	 * This var is in case I wanted to get random floors
 	 */
 	private static ArrayList<Integer> floors = new ArrayList<Integer>() {{
-	    add(57);
+	    add(31);
 	}};
 	
 	/**
@@ -25,14 +27,24 @@ public class GenerateMap {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		int width = 3;
-		int height = 3;
+		int width = 9;
+		int height = 9;
 		int[][] map = new int[(width*2)+1][(height*2)+1];
 		
 		for(int i = 0; i < (width*2)+1; i++) {
 			for(int j = 0; j < (height*2)+1; j++) {
-				map[i][j] = wall(0);
+				map[i][j] = wall(1);
 			}
+		}
+		
+		for(int i = 0; i < (width*2)+1; i++) {
+			map[0][i] = wall(0);
+			map[(width*2)][i] = wall(0);
+		}
+		
+		for(int i = 0; i < (height*2)+1; i++) {
+			map[i][0] = wall(0);
+			map[i][(height*2)] = wall(0);
 		}
 		
 		//get row number
@@ -140,7 +152,26 @@ public class GenerateMap {
 			}
 		}
 		
-		FileActions.createFile(startx, starty, (width*2)+1, (width*2)+1, map);
+		
+		//Remove some of the inside random walls so that rooms might get created
+		int newWidth = (width*2)+1;
+		int newHeight = (height*2)+1;
+		
+		for(int i = 1; i < newWidth-1; i++) {
+			for(int j = 1; j < newHeight-1; j++) {
+				if(walls.contains(map[i][j])) {
+					Random rand = new Random();
+					int  n = rand.nextInt(10) + 1;
+					
+					if(n <= 3) {
+						map[i][j] = floor(0);
+					}
+				}
+			}
+		}
+		
+		//Final actions
+		FileActions.createFile(startx, starty, (width*2)+1, (height*2)+1, map);
 		
 		System.out.println("Map Created");
 	}
