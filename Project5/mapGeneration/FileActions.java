@@ -10,6 +10,12 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class FileActions {
+	/**
+	 * This changed the file so that the user can start in different location
+	 * @param startX
+	 * @param startY
+	 * @throws IOException
+	 */
 	public static void changeMapFile(int startX, int startY) throws IOException {
 		ArrayList<String> lines = new ArrayList<String>();
 		String line = null;
@@ -36,6 +42,15 @@ public class FileActions {
 		out.close();
 	}
 	
+	/**
+	 * This creates the actual map file
+	 * @param startX
+	 * @param startY
+	 * @param width
+	 * @param height
+	 * @param map
+	 * @throws IOException
+	 */
 	public static void createFile(int startX, int startY, int width, int height, int[][] map) throws IOException {
 		changeMapFile(startX, startY);
 		

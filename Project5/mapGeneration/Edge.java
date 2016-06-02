@@ -9,6 +9,11 @@ public class Edge implements Comparable<Edge> {
 	private int node2;
 	private int weight;
 	
+	/**
+	 * The default constructor
+	 * @param _node1
+	 * @param _node2
+	 */
 	public Edge(int _node1, int _node2) {
 		node1 = _node1;
 		node2 = _node2;
@@ -18,29 +23,53 @@ public class Edge implements Comparable<Edge> {
 		weight = n;
 	}
 	
+	/**
+	 * A secondary constructor for testing
+	 * @param _node1
+	 * @param _node2
+	 * @param _weight
+	 */
 	public Edge(int _node1, int _node2, int _weight) {
 		node1 = _node1;
 		node2 = _node2;
 		weight = _weight;
 	}
 	
+	/**
+	 * Gets the weight of the Edge
+	 * @return
+	 */
 	public int getWeight() {
 		return weight;
 	}
 	
+	/**
+	 * Gets the first node of the edge
+	 * @return
+	 */
 	public int getNode1() {
 		return node1;
 	}
 	
+	/**
+	 * Gets the second node of the edge
+	 * @return
+	 */
 	public int getNode2() {
 		return node2;
 	}
 	
+	/**
+	 * Converts the edge to a more readable string
+	 */
 	public String toString() {
 		return Integer.toString(node1) + "->" + Integer.toString(node2) + ":" + Integer.toString(weight);
 		//return getLetter(node1) + "->" + getLetter(node2) + ":" + Integer.toString(weight);
 	}
 	
+	/**
+	 * Need this to compare the weights in the comparator
+	 */
 	public int compareTo(Edge that) {
 		if(this.getWeight() < that.getWeight()) {
 			return this.getWeight();
@@ -49,16 +78,30 @@ public class Edge implements Comparable<Edge> {
 		}
     }
 	
+	/**
+	 * Need this to check weights
+	 * @param that
+	 * @return
+	 */
 	public boolean equals(Edge that) {
 		return (this.node1 == that.getNode1() && this.node2 == that.getNode2() && this.weight == that.getWeight());
 	}
 	
+	/**
+	 * Takes in a list of edges to print
+	 * @param edges
+	 */
 	public static void printEdgeList(ArrayList<Edge> edges) {
 		for(int i = 0; i < edges.size(); i++) {
 			System.out.println(edges.get(i).toString());
 		}
 	}
-
+	
+	/**
+	 * I used this in development to make things easier
+	 * @param i
+	 * @return
+	 */
 	private String getLetter(int i) {
 		switch(i){
 			case 0:
@@ -86,26 +129,10 @@ public class Edge implements Comparable<Edge> {
 		}
 	}
 	
-	public static boolean causeCycle(ArrayList<Edge> tree, Edge edge) {
-		boolean node1Exists = false;
-		boolean node2Exists = false;
-		
-		for(int i = 0; i < tree.size(); i ++) {
-			if(tree.get(i).getNode1() == edge.getNode1() || tree.get(i).getNode2() == edge.getNode1()) {
-				node1Exists = true;
-			}
-			if(tree.get(i).getNode1() == edge.getNode2() || tree.get(i).getNode2() == edge.getNode2()) {
-				node2Exists = true;
-			}
-			
-			if(node1Exists && node2Exists){
-				break;
-			}
-		}
-		
-		return (node1Exists && node2Exists);
-	}
-	
+	/**
+	 * This is used to calculate the weight of the MST I had it in here to check if my things were working correctly
+	 * @param edges
+	 */
 	public static void calculateWeight(ArrayList<Edge> edges) {
 		int weight = 0;
 		for(int i = 0; i < edges.size(); i++) {

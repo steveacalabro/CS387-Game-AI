@@ -5,14 +5,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class GenerateMap {
+	/**
+	 * This would be in case I wanted to get random walls
+	 */
 	private static ArrayList<Integer> walls = new ArrayList<Integer>() {{
 	    add(67);
 	}};
 	
+	/**
+	 * This var is in case I wanted to get random floors
+	 */
 	private static ArrayList<Integer> floors = new ArrayList<Integer>() {{
 	    add(57);
 	}};
 	
+	/**
+	 * This is that main method that will generate the edges and use Kruskals to make a map
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException {
 		int width = 3;
 		int height = 3;
@@ -75,6 +86,7 @@ public class GenerateMap {
 		
 		Collections.sort(edges, new EdgeComparator());
 		
+		//Kruskal
 		ArrayList<ArrayList<Integer>> s = new ArrayList<ArrayList<Integer>>();
 		for(int i = 0; i < width*height; i++) {
 			ArrayList<Integer> e = new ArrayList<Integer>();
@@ -133,16 +145,20 @@ public class GenerateMap {
 		System.out.println("Map Created");
 	}
 	
-	public int[][] kruskalMap(int width, int height) {
-		int[][] map = new int[width][height];
-		
-		return map;
-	}
-	
+	/**
+	 * This will pick a floor type
+	 * @param type
+	 * @return
+	 */
 	public static int floor(int type) {
 		return floors.get(type);
 	}
 	
+	/**
+	 * This will pick a wall type
+	 * @param type
+	 * @return
+	 */
 	public static int wall(int type) {
 		return walls.get(type);
 	}
