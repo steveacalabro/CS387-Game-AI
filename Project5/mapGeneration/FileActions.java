@@ -19,7 +19,8 @@ public class FileActions {
 	public static void changeMapFile(int startX, int startY) throws IOException {
 		ArrayList<String> lines = new ArrayList<String>();
 		String line = null;
-		File f1 = new File("C:/Users/midevilw0rm/_git/CS387-Game-AI/Project5/games/example/baseExample.xml");
+		//File f1 = new File("C:/Users/midevilw0rm/_git/CS387-Game-AI/Project5/games/example/baseExample.xml");
+		File f1 = new File("/Users/stephencalabro/_git/CS387 Game AI/Project5/games/example/baseExample.xml");
 		FileReader fr = new FileReader(f1);
 		BufferedReader br = new BufferedReader(fr);
 		
@@ -33,7 +34,8 @@ public class FileActions {
 		fr.close();
 		br.close();
 		
-		File f2 = new File("C:/Users/midevilw0rm/_git/CS387-Game-AI/Project5/games/example/example.xml");
+		//File f2 = new File("C:/Users/midevilw0rm/_git/CS387-Game-AI/Project5/games/example/example.xml");
+		File f2 = new File("/Users/stephencalabro/_git/CS387 Game AI/Project5/games/example/example.xml");
 		FileWriter fw = new FileWriter(f2);
 		BufferedWriter out = new BufferedWriter(fw);
 		for(String s : lines)
@@ -54,7 +56,9 @@ public class FileActions {
 	public static void createFile(int startX, int startY, int width, int height, int[][] map) throws IOException {
 		changeMapFile(startX, startY);
 		
-		File file = new File("C:/Users/midevilw0rm/_git/CS387-Game-AI/Project5/games/example/newMap.tmx");
+		//File file = new File("C:/Users/midevilw0rm/_git/CS387-Game-AI/Project5/games/example/newMap.tmx");
+		File file = new File("/Users/stephencalabro/_git/CS387 Game AI/Project5/games/example/newMap.tmx");
+
 		PrintWriter writer = new PrintWriter(file, "UTF-8");
 		
 		//Header to XML

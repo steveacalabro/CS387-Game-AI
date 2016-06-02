@@ -195,7 +195,7 @@
 
 	<map file="newMap.tmx"/>
 
-	<player class="Crab" x="7" y="3" map="0"/>	
+	<player class="Crab" x="23" y="1" map="0"/>	
 
 	<onStart>
 		<addTopic topic="yourself" text="tell me about yourself"/>

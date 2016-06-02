@@ -29,8 +29,8 @@ public class GenerateMap {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		int width = 9;
-		int height = 9;
+		int width = 15;
+		int height = 15;
 		int[][] map = new int[(width*2)+1][(height*2)+1];
 		
 		for(int i = 0; i < (width*2)+1; i++) {
