@@ -1,9 +1,6 @@
 package mapGeneration;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GenerateMap {
@@ -15,7 +12,7 @@ public class GenerateMap {
 	    add(57);
 	}};
 	
-	public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+	public static void main(String[] args) throws IOException {
 		int width = 6;
 		int height = 6;
 		int[][] map = new int[width][height];
@@ -62,43 +59,10 @@ public class GenerateMap {
 		map[5][4] = wall(0);
 		map[5][5] = wall(0);
 		
-		createFile(2, 2, 6, 6, map);
-	}
-	
-	public static void createFile(int startX, int startY, int width, int height, int[][] map) throws FileNotFoundException, UnsupportedEncodingException {
-		File file = new File("C:/Users/midevilw0rm/_git/CS387-Game-AI/Project5/games/example/newMap.tmx");
-		PrintWriter writer = new PrintWriter(file, "UTF-8");
+		FileActions.createFile(3, 3, 6, 6, map);
 		
-		//Header to XML
-		writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-		writer.println("<map version=\"1.0\" orientation=\"orthogonal\" width=\"" + width + "\" height=\"" + height + "\" tilewidth=\"64\" tileheight=\"64\">");
-		writer.println("<properties>");
-		writer.println("<property name=\"name\" value=\"Steve's Map\"/>");
-		writer.println("</properties>");
-		writer.println("<tileset firstgid=\"1\" name=\"graphics\" tilewidth=\"64\" tileheight=\"64\">");
-		writer.println("<image source=\"graphics2x-basic.png\" width=\"640\" height=\"1344\"/>");
-		writer.println("</tileset>");
-		writer.println("<tileset firstgid=\"211\" name=\"walls\" tilewidth=\"64\" tileheight=\"64\">");
-		writer.println("<image source=\"graphics2x-walls.png\" width=\"128\" height=\"1024\"/>");
-		writer.println("</tileset>");
-		writer.println("<layer name=\"Tile Layer 1\" width=\"" + width + "\" height=\"" + height +"\">");
-		writer.println("<data>");
-		
-		//Loop for Map
-		writer.println("<tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/>");
-		writer.println("<tile gid=\"67\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"67\"/>");
-		writer.println("<tile gid=\"67\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"67\"/>");
-		writer.println("<tile gid=\"67\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"67\"/>");
-		writer.println("<tile gid=\"67\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"67\"/>");
-		writer.println("<tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/>");
-
-		//Closing
-		writer.println("</data>");
-		writer.println("</layer>");
-		writer.println("</map>");
-		writer.close();
+		System.out.println("Map Created");
 	}
-	
 	
 	public static int floor(int type) {
 		return floors.get(type);
