@@ -69,6 +69,19 @@ public class FileActions {
 		writer.println("<tileset firstgid=\"211\" name=\"walls\" tilewidth=\"64\" tileheight=\"64\">");
 		writer.println("<image source=\"graphics2x-walls.png\" width=\"128\" height=\"1024\"/>");
 		writer.println("</tileset>");
+		writer.println("<layer name=\"Base Layer\" width=\"" + width + "\" height=\"" + height +"\">");
+		writer.println("<data>");
+		
+		//Loop for Map
+		for(int i = 0; i < map.length; i++) {
+			for(int j = 0; j < map[0].length; j++) {
+				writer.println("<tile gid=\"31\"/>");
+			}
+		}
+		
+		//Closing
+		writer.println("</data>");
+		writer.println("</layer>");
 		writer.println("<layer name=\"Tile Layer 1\" width=\"" + width + "\" height=\"" + height +"\">");
 		writer.println("<data>");
 		

@@ -10,8 +10,10 @@ public class GenerateMap {
 	 * This would be in case I wanted to get random walls
 	 */
 	private static ArrayList<Integer> walls = new ArrayList<Integer>() {{
-	    add(45);
-	    add(46);
+	    add(45);//bigtree
+	    add(46);//smalltree
+	    add(42);//house1
+	    add(47);//rock
 	}};
 	
 	/**
@@ -165,6 +167,15 @@ public class GenerateMap {
 					
 					if(n <= 3) {
 						map[i][j] = floor(0);
+					}
+					
+					Random rand2 = new Random();
+					int  n2 = rand2.nextInt(100) + 1;
+					if(n2 <= 2) {
+						map[i][j] = wall(2);
+					}
+					if(n2 > 2 && n2 <=4) {
+						map[i][j] = wall(3);
 					}
 				}
 			}
