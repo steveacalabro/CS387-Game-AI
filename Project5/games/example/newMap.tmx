@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="6" height="6" tilewidth="64" tileheight="64">
+<properties>
+<property name="name" value="Steve's Map"/>
+</properties>
+<tileset firstgid="1" name="graphics" tilewidth="64" tileheight="64">
+<image source="graphics2x-basic.png" width="640" height="1344"/>
+</tileset>
+<tileset firstgid="211" name="walls" tilewidth="64" tileheight="64">
+<image source="graphics2x-walls.png" width="128" height="1024"/>
+</tileset>
+<layer name="Tile Layer 1" width="6" height="6">
+<data>
+<tile gid="67"/><tile gid="67"/><tile gid="67"/><tile gid="67"/><tile gid="67"/><tile gid="67"/>
+<tile gid="67"/><tile gid="57"/><tile gid="57"/><tile gid="57"/><tile gid="57"/><tile gid="67"/>
+<tile gid="67"/><tile gid="57"/><tile gid="57"/><tile gid="57"/><tile gid="57"/><tile gid="67"/>
+<tile gid="67"/><tile gid="57"/><tile gid="57"/><tile gid="57"/><tile gid="57"/><tile gid="67"/>
+<tile gid="67"/><tile gid="57"/><tile gid="57"/><tile gid="57"/><tile gid="57"/><tile gid="67"/>
+<tile gid="67"/><tile gid="67"/><tile gid="67"/><tile gid="67"/><tile gid="67"/><tile gid="67"/>
+</data>
+</layer>
+</map>

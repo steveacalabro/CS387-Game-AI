@@ -193,9 +193,9 @@
 	<characterDefinition file="players.xml"/>
 	<objectDefinition file="objects.xml"/>
 
-	<map file="map.tmx"/>
+	<map file="newMap.tmx"/>
 
-	<player class="Warrior" x="8" y="7" map="0"/>	
+	<player class="Warrior" x="2" y="2" map="0"/>	
 
 	<onStart>
 		<addTopic topic="yourself" text="tell me about yourself"/>
