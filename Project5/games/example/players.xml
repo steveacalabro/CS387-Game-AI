@@ -24,7 +24,7 @@
 		</onStart>		
 	</CharacterClass>
 	
-	<CharacterClass class="Crab" super="PlayerCharacter" name="Wizard">
+	<CharacterClass class="Crab" super="PlayerCharacter" name="Zoidberg">
 		<animation name="idle-left" dx="1" dy="1" period="4" looping="false" file="graphics2x-characters.png">62</animation>
 		<animation name="idle-up" dx="1" dy="1" period="4" looping="false" file="graphics2x-characters.png">62</animation>
 		<animation name="idle-right" dx="1" dy="1" period="4" looping="false" file="graphics2x-characters.png">60</animation>
@@ -46,8 +46,8 @@
 		<attribute name="canSwim" value="false"/>
 		<attribute name="walk_speed" value="16"/>
 
-		<spell>magic missile</spell>
-		<spell>heal</spell>
+		<spell>Whoop Whoop Whoop!</spell>
+		<spell>Shed Shell</spell>
 
 		<item>new ItemHPotion(10, Animation.fromTile(1,"graphics2x.png"))</item>
 		<item>new ItemMPotion(10, Animation.fromTile(5,"graphics2x.png"))</item>
