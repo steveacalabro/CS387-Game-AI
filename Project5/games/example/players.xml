@@ -23,4 +23,33 @@
 		<onStart>
 		</onStart>		
 	</CharacterClass>
+	
+	<CharacterClass class="Crab" super="PlayerCharacter" name="Wizard">
+		<animation name="idle-left" dx="1" dy="1" period="4" looping="false" file="graphics2x-characters.png">62</animation>
+		<animation name="idle-up" dx="1" dy="1" period="4" looping="false" file="graphics2x-characters.png">62</animation>
+		<animation name="idle-right" dx="1" dy="1" period="4" looping="false" file="graphics2x-characters.png">60</animation>
+		<animation name="idle-down" dx="1" dy="1" period="4" looping="false" file="graphics2x-characters.png">60</animation>
+		<animation name="moving-left" dx="1" dy="1" period="4" looping="true" file="graphics2x-characters.png">62,63</animation>
+		<animation name="moving-up" dx="1" dy="1" period="4" looping="true" file="graphics2x-characters.png">62,63</animation>
+		<animation name="moving-right" dx="1" dy="1" period="4" looping="true" file="graphics2x-characters.png">60,61</animation>
+		<animation name="moving-down" dx="1" dy="1" period="4" looping="true" file="graphics2x-characters.png">60,61</animation>
+		<animation name="death" dx="1" dy="1" period="50" looping="false" file="graphics2x-characters.png">-1</animation>
+
+	    <attribute name="experienceToLevelUp" value="10" levelupmultiply="1.5"/>
+		<attribute name="gold" value="100"/>
+		<attribute name="hp" value="15" levelupadd="3"/>
+		<attribute name="mp" value="10" levelupadd="2"/>
+		<attribute name="attack" value="4" levelupadd="1"/>
+		<attribute name="defense" value="0" levelupadd="1"/>
+		<attribute name="attack_modifier" value="0.6"/>
+		<attribute name="defense_modifier" value="0.75"/>
+		<attribute name="canSwim" value="false"/>
+		<attribute name="walk_speed" value="16"/>
+
+		<spell>magic missile</spell>
+		<spell>heal</spell>
+
+		<item>new ItemHPotion(10, Animation.fromTile(1,"graphics2x.png"))</item>
+		<item>new ItemMPotion(10, Animation.fromTile(5,"graphics2x.png"))</item>
+	</CharacterClass>
 </Characters>
