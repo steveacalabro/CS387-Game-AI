@@ -37,8 +37,8 @@ public class Edge implements Comparable<Edge> {
 	}
 	
 	public String toString() {
-		//return Integer.toString(node1) + "->" + Integer.toString(node2) + ":" + Integer.toString(weight);getLetter
-		return getLetter(node1) + "->" + getLetter(node2) + ":" + Integer.toString(weight);
+		return Integer.toString(node1) + "->" + Integer.toString(node2) + ":" + Integer.toString(weight);
+		//return getLetter(node1) + "->" + getLetter(node2) + ":" + Integer.toString(weight);
 	}
 	
 	public int compareTo(Edge that) {
@@ -48,6 +48,10 @@ public class Edge implements Comparable<Edge> {
 			return that.getWeight();
 		}
     }
+	
+	public boolean equals(Edge that) {
+		return (this.node1 == that.getNode1() && this.node2 == that.getNode2() && this.weight == that.getWeight());
+	}
 	
 	public static void printEdgeList(ArrayList<Edge> edges) {
 		for(int i = 0; i < edges.size(); i++) {
@@ -83,23 +87,23 @@ public class Edge implements Comparable<Edge> {
 	}
 	
 	public static boolean causeCycle(ArrayList<Edge> tree, Edge edge) {
-		boolean child1 = false;
-		boolean child2 = false;
+		boolean node1Exists = false;
+		boolean node2Exists = false;
 		
 		for(int i = 0; i < tree.size(); i ++) {
-			if(tree.get(i).getNode2() == edge.getNode1()) {
-				child1 = true;
+			if(tree.get(i).getNode1() == edge.getNode1() || tree.get(i).getNode2() == edge.getNode1()) {
+				node1Exists = true;
 			}
-			if(tree.get(i).getNode2() == edge.getNode2()) {
-				child2 = true;
+			if(tree.get(i).getNode1() == edge.getNode2() || tree.get(i).getNode2() == edge.getNode2()) {
+				node2Exists = true;
 			}
 			
-			if(child1 && child2){
+			if(node1Exists && node2Exists){
 				break;
 			}
 		}
 		
-		return (child1 && child2);
+		return (node1Exists && node2Exists);
 	}
 	
 	public static void calculateWeight(ArrayList<Edge> edges) {

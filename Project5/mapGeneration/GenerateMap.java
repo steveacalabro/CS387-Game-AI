@@ -14,104 +14,123 @@ public class GenerateMap {
 	}};
 	
 	public static void main(String[] args) throws IOException {
-		/*int[][] map = new int[width][height];
-		
-		map[0][0] = wall(0);
-		map[0][1] = wall(0);
-		map[0][2] = wall(0);
-		map[0][3] = wall(0);
-		map[0][4] = wall(0);
-		map[0][5] = wall(0);
-		
-		map[1][0] = wall(0);
-		map[1][1] = floor(0);
-		map[1][2] = floor(0);
-		map[1][3] = floor(0);
-		map[1][4] = floor(0);
-		map[1][5] = wall(0);
-		
-		map[2][0] = wall(0);
-		map[2][1] = floor(0);
-		map[2][2] = floor(0);
-		map[2][3] = floor(0);
-		map[2][4] = floor(0);
-		map[2][5] = wall(0);
-		
-		map[3][0] = wall(0);
-		map[3][1] = floor(0);
-		map[3][2] = floor(0);
-		map[3][3] = floor(0);
-		map[3][4] = floor(0);
-		map[3][5] = wall(0);
-		
-		map[4][0] = wall(0);
-		map[4][1] = floor(0);
-		map[4][2] = floor(0);
-		map[4][3] = floor(0);
-		map[4][4] = floor(0);
-		map[4][5] = wall(0);
-		
-		map[5][0] = wall(0);
-		map[5][1] = wall(0);
-		map[5][2] = wall(0);
-		map[5][3] = wall(0);
-		map[5][4] = wall(0);
-		map[5][5] = wall(0);
-		
-		FileActions.createFile(3, 3, 4, 4, map);
-		
-		System.out.println("Map Created");*/
-		
 		int width = 3;
 		int height = 3;
-		int[][] map = new int[width][height];
+		int[][] map = new int[(width*2)+1][(height*2)+1];
+		
+		for(int i = 0; i < (width*2)+1; i++) {
+			for(int j = 0; j < (height*2)+1; j++) {
+				map[i][j] = wall(0);
+			}
+		}
+		
+		//get row number
+		for(int i = 0; i < width*height; i++) {
+			int row = 2*(i/width)+1;
+			int col = 2*(i%width)+1;
+			
+			map[row][col] = floor(0);
+		}
+		
+		//The node map
+		int nodeCount = 0;
+		int[][] map2 = new int[width][height];
+		for(int i = 0; i < width; i++) {
+			for(int j = 0; j < height; j++) {
+				map2[i][j] = nodeCount;
+				nodeCount++;
+			}
+		}
+		
+		//Make edges
 		ArrayList<Edge> edges = new ArrayList<Edge>();
-		
-		map[0][0] = 0;map[0][1] = 1;map[0][2] = 2;
-		map[1][0] = 3;map[1][1] = 4;map[1][2] = 5;
-		map[2][0] = 6;map[2][1] = 7;map[2][2] = 8;
-		
-		/*
 		for(int i = 0; i < height; i++) {
 			for(int j = 0; j < width - 1; j++) {
-				Edge e = new Edge(map[i][j], map[i][j+1]);
+				Edge e = new Edge(map2[i][j], map2[i][j+1]);
 				edges.add(e);
 			}
 		}
 		
 		for(int i = 0; i < height - 1; i++) {
 			for(int j = 0; j < width; j++) {
-				Edge e = new Edge(map[i][j], map[i + 1][j]);
+				Edge e = new Edge(map2[i][j], map2[i + 1][j]);
 				edges.add(e);
 			}
-		}*/
+		}
 		
-		edges.add(new Edge(0, 1, 2));
-		edges.add(new Edge(0, 2, 3));
-		edges.add(new Edge(0, 3, 3));
-		edges.add(new Edge(3, 2, 5));
-		edges.add(new Edge(3, 5, 7));
-		edges.add(new Edge(2, 4, 1));
-		edges.add(new Edge(1, 4, 3));
-		edges.add(new Edge(1, 2, 4));
-		edges.add(new Edge(4, 5, 8));
-		edges.add(new Edge(5, 6, 9));
+		/* for testing
+		edges.add(new Edge(0, 1, 8));
+		edges.add(new Edge(1, 2, 5));
+		edges.add(new Edge(3, 4, 2));
+		edges.add(new Edge(4, 5, 3));
+		edges.add(new Edge(6, 7, 10));
+		edges.add(new Edge(7, 8, 4));
+		edges.add(new Edge(0, 3, 8));
+		edges.add(new Edge(1, 4, 9));
+		edges.add(new Edge(2, 5, 9));
+		edges.add(new Edge(3, 6, 1));
+		edges.add(new Edge(4, 7, 7));
+		edges.add(new Edge(5, 8, 6));
+		*/
 		
 		Collections.sort(edges, new EdgeComparator());
 		
-		//Edge.printEdgeList(edges);
+		ArrayList<ArrayList<Integer>> s = new ArrayList<ArrayList<Integer>>();
+		for(int i = 0; i < width*height; i++) {
+			ArrayList<Integer> e = new ArrayList<Integer>();
+			e.add(i);
+			s.add(e);
+		}
 		
 		ArrayList<Edge> tree = new ArrayList<Edge>();
 		for(int i = 0; i < edges.size(); i++) {
 			Edge cur = edges.get(i);
-			//if not cycle
-			if(!Edge.causeCycle(tree, cur)) {
+			
+			if(!s.get(cur.getNode1()).equals(s.get(cur.getNode2()))) {
 				tree.add(cur);
+				
+				ArrayList<Integer> newList = new ArrayList<Integer>(s.get(cur.getNode1()));
+				newList.addAll(s.get(cur.getNode2()));
+				
+				s.set(cur.getNode1(), newList);
+				s.set(cur.getNode2(), newList);
+				
+				for(int x = 0; x < newList.size(); x++) {
+					s.set(newList.get(x), newList);
+				}
+			}
+		}
+
+		Edge.printEdgeList(tree);
+		
+		int startx = -1;
+		int starty = -1;
+		
+		//get row number
+		for(int i = 0; i < tree.size(); i++) {
+			Edge cur = tree.get(i);
+			
+			int row1 = 2*(cur.getNode1()/width)+1;
+			int col1 = 2*(cur.getNode1()%width)+1;
+			
+			if(startx == -1) {
+				startx = col1;
+				starty = row1;
+			}
+			
+			int row2 = 2*(cur.getNode2()/width)+1;
+			int col2 = 2*(cur.getNode2()%width)+1;
+			
+			if(col2 > col1) {
+				map[row1][col1+1] = floor(0);
+			} else if(row2 > row1) {
+				map[row1+1][col1] = floor(0);
 			}
 		}
 		
-		Edge.printEdgeList(tree);
-		Edge.calculateWeight(tree);
+		FileActions.createFile(startx, starty, (width*2)+1, (width*2)+1, map);
+		
+		System.out.println("Map Created");
 	}
 	
 	public int[][] kruskalMap(int width, int height) {
@@ -128,13 +147,3 @@ public class GenerateMap {
 		return walls.get(type);
 	}
 }
-/*
-2 2 2 2 2 2 2 2
-2 1 1 1 0 0 0 2
-2 0 0 1 0 0 0 2 
-2 1 1 1 1 0 0 2
-2 0 1 0 1 0 0 2
-2 0 1 1 1 1 1 2
-2 0 1 0 0 1 0 2
-2 2 2 2 2 2 2 2
-*/

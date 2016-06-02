@@ -58,13 +58,12 @@ public class FileActions {
 		writer.println("<data>");
 		
 		//Loop for Map
-		writer.println("<tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/>");
-		writer.println("<tile gid=\"67\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"67\"/>");
-		writer.println("<tile gid=\"67\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"67\"/>");
-		writer.println("<tile gid=\"67\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"67\"/>");
-		writer.println("<tile gid=\"67\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"57\"/><tile gid=\"67\"/>");
-		writer.println("<tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/><tile gid=\"67\"/>");
-
+		for(int i = 0; i < map.length; i++) {
+			for(int j = 0; j < map[0].length; j++) {
+				writer.println("<tile gid=\""+map[i][j]+"\"/>");
+			}
+		}
+		
 		//Closing
 		writer.println("</data>");
 		writer.println("</layer>");
